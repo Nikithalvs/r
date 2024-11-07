@@ -1,0 +1,79 @@
+1.A
+
+library(ggplot2)
+data("iris")
+head("iris")
+iris_data <- iris[, -5]
+k <- 3
+set.seed(123)
+kmeans_result <- kmeans(iris_data, centers = k, nstart = 25)
+print(kmeans_result)
+iris$Cluster <- as.factor(kmeans_result$cluster)
+ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Cluster, shape = Species)) +
+  geom_point(size = 3) +
+  labs(title = "K-means Clustering of Iris Dataset",
+       x = "Petal Length", y = "Petal Width") +
+  theme_minimal()
+
+
+1.B
+# Define the months
+months_data <- c("March", "January", "June", "September", "December")
+
+# Create an ordered factor
+ordered_months <- factor(months_data,
+                         levels = c("January", "February", "March", "April", "May", "June",
+                                    "July", "August", "September", "October", "November", "December"),
+                         ordered = TRUE)
+
+# Print the ordered factor
+print(ordered_months)
+
+2A
+
+library(party)
+input_data <- readingSkills
+png(file = "decision-tree.png")
+my_formula <- nativeSpeaker ~ age + shoeSize + score
+output_tree <- ctree(my_formula, data = input_data)
+plot(output_tree)
+dev.off()
+
+
+2.B
+
+# Initialize counter
+counter <- 1
+
+# Start while loop
+while (counter <= 5) {
+  print(paste("Counter:", counter))
+  counter <- counter + 1 # Increment counter
+}
+
+3.A
+
+install.packages("rpart")
+library(rpart)
+data(iris)
+
+new <-iris[-5]
+head (new)
+ind <- sample (2,nrow(iris),replace = TRUE, prob=c(0.8,0.2))
+train <- iris[ind == 1,]
+test <- iris[ind == 2,]
+tree <- rpart(Species~.,train)
+print(tree)
+install.packages("rpart.plot")
+library(rpart.plot)
+rpart.plot(tree)
+
+3.B
+
+# Define a vector of numbers
+numbers <- c(1, 2, 3, 4, 5)
+
+# Use a for loop to print each element
+for (num in numbers) {
+  print(paste("Current number:", num))
+}
